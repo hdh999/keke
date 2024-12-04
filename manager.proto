@@ -1,0 +1,716 @@
+syntax = "proto3";
+
+package api.manager.v1;
+
+import "google/api/annotations.proto";
+
+option go_package = "pix-fashion-image-dataset-manager/api/manager/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.manager.v1";
+
+service Manager {
+	// 创建模特
+	rpc CreateModel (CreateModelRequest) returns (CreateModelReply){
+		option (google.api.http) = {
+		  post: "/create_model",
+		  body: "*",
+		};
+	};
+	// 创建服装
+	rpc CreateGarment (CreateGarmentRequest) returns (CreateGarmentReply){
+		option (google.api.http) = {
+		  post: "/create_garment",
+		  body: "*",
+		};
+	};
+	// 创建基础信息
+	rpc CreateBase (CreateBaseRequest) returns (CreateBaseReply){
+		option (google.api.http) = {
+		  post: "/create_base",
+		  body: "*",
+		};
+	};
+	// 更新模特
+	rpc UpdateModel (UpdateModelRequest) returns (UpdateModelReply){
+		option (google.api.http) = {
+		  post: "/update_model",
+		  body: "*",
+		};
+	};
+	// 更新服装
+	rpc UpdateGarment (UpdateGarmentRequest) returns (UpdateGarmentReply){
+		option (google.api.http) = {
+		  post: "/update_garment",
+		  body: "*",
+		};
+	};
+	// 更新基础信息
+	rpc UpdateBase (UpdateBaseRequest) returns (UpdateBaseReply){
+		option (google.api.http) = {
+		  post: "/update_base",
+		  body: "*",
+		};
+	};
+	// 创建模特服装关系
+	rpc CreateModelGarmentRelation (CreateModelGarmentRelationRequest) returns (CreateModelGarmentRelationReply){
+		option (google.api.http) = {
+		  post: "/create_model_garment_relation",
+		  body: "*",
+		};
+	};
+	// 根据模特id获取模特
+	rpc GetModelByIDs (GetModelByIDsRequest) returns (GetModelByIDsReply){
+		option (google.api.http) = {
+		  post: "/get_model_by_ids",
+		  body: "*",
+		};
+	};
+	// 根据服装id获取服装
+	rpc GetGarmentByIDs (GetGarmentByIDsRequest) returns (GetGarmentByIDsReply){
+		option (google.api.http) = {
+		  post: "/get_garment_by_ids",
+		  body: "*",
+		};
+	};
+	// 根据baseid获取基础信息
+	rpc GetBaseByIDs (GetBaseByIDsRequest) returns (GetBaseByIDsReply){
+		option (google.api.http) = {
+		  post: "/get_base_by_ids",
+		  body: "*",
+		};
+	};
+	// 根据服装id获取对应的模特信息
+	rpc GetRelatedModelByGarmentIDs (GetRelatedModelByGarmentIDsRequest) returns (GetRelatedModelByGarmentIDsReply){
+		option (google.api.http) = {
+		  post: "/get_related_model_by_garment_ids",
+		  body: "*",
+		};
+	};
+	// 根据模特id获取对应的服装信息
+	rpc GetRelatedGarmentByModelIDs (GetRelatedGarmentByModelIDsRequest) returns (GetRelatedGarmentByModelIDsReply){
+		option (google.api.http) = {
+		  post: "/get_related_garment_by_model_ids",
+		  body: "*",
+		};
+	};
+	// 删除模特
+	rpc DeleteModelByIDs (DeleteModelByIDsRequest) returns (DeleteModelByIDsReply){
+		option (google.api.http) = {
+		  post: "/delete_model_by_ids",
+		  body: "*",
+		};
+	};
+	// 删除服装
+	rpc DeleteGarmentByIDs (DeleteGarmentByIDsRequest) returns (DeleteGarmentByIDsReply){
+		option (google.api.http) = {
+		  post: "/delete_garment_by_ids",
+		  body: "*",
+		};
+	};
+	// 删除基础信息
+	rpc DeleteBaseByIDs (DeleteBaseByIDsRequest) returns (DeleteBaseByIDsReply){
+		option (google.api.http) = {
+		  post: "/delete_base_by_ids",
+		  body: "*",
+		};
+	};
+	// 删除模特服装关系
+	rpc DeleteModelGarmentRelation (DeleteModelGarmentRelationRequest) returns (DeleteModelGarmentRelationReply){
+		option (google.api.http) = {
+		  post: "/delete_model_garment_relation",
+		  body: "*",
+		};
+	};
+	// 搜索模特
+	rpc SearchModel (SearchModelRequest) returns (SearchModelReply){
+		option (google.api.http) = {
+		  post: "/search_model",
+		  body: "*",
+		};
+	};
+	// 搜索服装
+	rpc SearchGarment (SearchGarmentRequest) returns (SearchGarmentReply){
+		option (google.api.http) = {
+		  post: "/search_garment",
+		  body: "*",
+		};
+	};
+	// 搜索基础信息
+	rpc SearchBase (SearchBaseRequest) returns (SearchBaseReply){
+		option (google.api.http) = {
+		  post: "/search_base",
+		  body: "*",
+		};
+	};
+	// 搜索模特(附带关联的服装)
+	rpc SearchModelWithRelatedGarment (SearchModelRequest) returns (SearchModelWithRelatedGarmentReply){
+		option (google.api.http) = {
+		  post: "/search_model_with_related_garment",
+		  body: "*",
+		};
+	};
+	// 搜索服装(附带关联的模特)
+	rpc SearchGarmentWithRelatedModel (SearchGarmentRequest) returns (SearchGarmentWithRelatedModelReply){
+		option (google.api.http) = {
+		  post: "/search_garment_with_related_model",
+		  body: "*",
+		};
+	};
+	// 按字段更新模特
+	rpc UpdateModelFields (UpdateModelFieldsRequest) returns (UpdateModelFieldsReply){
+		option (google.api.http) = {
+		  post: "/update_model_fields",
+		  body: "*",
+		};
+	};
+	// 按字段更新服装
+	rpc UpdateGarmentFields (UpdateGarmentFieldsRequest) returns (UpdateGarmentFieldsReply){
+		option (google.api.http) = {
+		  post: "/update_garment_fields",
+		  body: "*",
+		};
+	};
+	// 按字段更新基础信息
+	rpc UpdateBaseFields (UpdateBaseFieldsRequest) returns (UpdateBaseFieldsReply){
+		option (google.api.http) = {
+		  post: "/update_base_fields",
+		  body: "*",
+		};
+	};
+	// 根据md5获取模特
+	rpc GetModelByMd5 (GetModelByMd5Request) returns (GetModelByMd5Reply){
+		option (google.api.http) = {
+		  post: "/get_model_by_md5",
+		  body: "*",
+		};
+	};
+	// 根据md5获取服装
+	rpc GetGarmentByMd5 (GetGarmentByMd5Request) returns (GetGarmentByMd5Reply){
+		option (google.api.http) = {
+		  post: "/get_garment_by_md5",
+		  body: "*",
+		};
+	};
+	// 根据md5获取base
+	rpc GetBaseByMd5 (GetBaseByMd5Request) returns (GetBaseByMd5Reply){
+		option (google.api.http) = {
+		  post: "/get_base_by_md5",
+		  body: "*",
+		};
+	};
+	// 模特图片相似度搜索(附带关联的服装)
+	rpc ModelSimilaritySearchWithRelatedGarment (ModelSimilaritySearchWithRelatedGarmentRequest) returns (ModelSimilaritySearchWithRelatedGarmentReply){
+		option (google.api.http) = {
+		  post: "/model_similarity_search_with_related_garment",
+		  body: "*",
+		};
+	};
+	// 服装图片相似度搜索(附带关联的模特)
+	rpc GarmentSimilaritySearchWithRelatedModel (GarmentSimilaritySearchWithRelatedModelRequest) returns (GarmentSimilaritySearchWithRelatedModelReply){
+		option (google.api.http) = {
+		  post: "/garment_similarity_search_with_related_model",
+		  body: "*",
+		};
+	};
+	// 获取随机模特样本(附带关联的服装)
+	rpc GetRandomModelSamplesWithRelatedGarment (GetRandomModelSamplesWithRelatedGarmentRequest) returns (GetRandomModelSamplesWithRelatedGarmentReply){
+		option (google.api.http) = {
+		  post: "/get_random_model_samples_with_related_garment",
+		  body: "*",
+		};
+	};
+	// 获取随机服装样本(附带关联的模特)
+	rpc GetRandomGarmentSamplesWithRelatedModel (GetRandomGarmentSamplesWithRelatedModelRequest) returns (GetRandomGarmentSamplesWithRelatedModelReply){
+		option (google.api.http) = {
+		  post: "/get_random_garment_samples_with_related_model",
+		  body: "*",
+		};
+	};
+}
+
+message ImageBase {
+	string image_base_id = 1; // 图片id, 初次创建时填空
+	string source = 2; // public, sysu, web, purchase, meitu_lab...
+	string sub_source = 3; // cos, farfetch, viton, dresscode, yoox...
+	string md5 = 4; // 图片md5
+	string file_type = 5; // jpg, png...
+	string type = 6; // garment, model...
+	int32 width = 7;
+	int32 height = 8;
+	map<string, string> path = 9; // 路径信息, 用于拼接url; original_path, align_path...
+	map<string, string> domain = 10; // 域名信息, 用于拼接url, 如"azure":"https://pixalgorithm.blob.core.windows.net"
+	map<string, string> ext_info = 11; // 扩展信息, 可自由定义
+	int64 created_at = 12; // 创建时间戳(ms), 后台自动生成, 请求方不需要填写
+	int64 updated_at = 13; // 更新时间戳(ms), 后台自动生成, 请求方不需要填写
+	map<string, string> original_info = 14; // 网站原始信息
+}
+
+message GarmentImage {
+	string garment_image_id = 1; // 服装图片id, 初次创建时填空
+	string image_base_id = 2; // 图片id, 初次创建时填空
+	string type = 3; // pix自定义分类
+	string pose = 4; // front, back, side
+	repeated string tags = 5; // 标签
+	string description = 6; // 描述
+	string life_stage = 7; // baby, child, teenager, adult, unknown
+	string gender = 8; // male, female
+	map<string, string> result_domain = 9; // 域名信息, 用于拼接url, 如"azure":"https://pixalgorithm.blob.core.windows.net"
+	map<string, string> result_path = 10; // 路径信息, 用于拼接url; cloth_mask_path, sod_path
+	map<string, string> original_info = 11;	// 网站原始信息
+	map<string, string> ext_info = 12; // 扩展信息, 可自由定义
+	ImageBase image_base = 13;
+	int64 created_at = 14; // 创建时间戳(ms), 后台自动生成, 请求方不需要填写
+	int64 updated_at = 15; // 更新时间戳(ms), 后台自动生成, 请求方不需要填写
+}
+
+message ModelImage {
+	string model_image_id = 1; // 模特图片id, 初次创建时填空
+	string image_base_id = 2; // 图片id, 初次创建时填空
+	string pose = 3; // front, back, side
+	string body_type = 4; // whole_body, upper_body, lower_body, partial_body
+	repeated string tags = 5; // 标签
+	string description = 6; // 描述
+	string life_stage = 7; // baby, child, teenager, adult, unknown
+	string gender = 8; // male, female
+	string pose_keypoints_info = 9;
+	map<string, string> original_info = 10; // 网站原始信息
+	map<string, string> result_domain = 11; // 域名信息, 用于拼接url, 如"azure":"https://pixalgorithm.blob.core.windows.net"
+	map<string, string> result_path = 12; // 路径信息, 用于拼接url; human_parsing_path, densepose_path, pose_path, sod_path, human_agnostic_path, parse_agnostic_path, agnostic_mask_path, cloth_warped_mask_path
+	map<string, string> ext_info = 13; // 扩展信息, 可自由定义
+	ImageBase image_base = 14;
+	int64 created_at = 15; // 创建时间戳(ms), 后台自动生成, 请求方不需要填写
+	int64 updated_at = 16; // 更新时间戳(ms), 后台自动生成, 请求方不需要填写
+	string model_count = 17; // 模特数量
+	string model_type = 18; // 模特类型
+	string gpt4o_classification = 19; // gpt4o分类
+	string hairstyle = 20; // 发型
+}
+
+message ModelGarmentRelation {
+	string model_image_id = 1;
+	string garment_image_id = 2;
+}
+
+message ModelInfo {
+	ModelImage model = 1;
+	repeated string target_garment_ids = 2;
+}
+
+message GarmentInfo {
+	GarmentImage garment = 1;
+	repeated string target_model_ids = 2;
+}
+
+message RelatedModelInfo {
+	repeated ModelImage model_images = 1;
+	string garment_image_id = 2;
+}
+
+message RelatedGarmentInfo {
+	repeated GarmentImage garment_images = 1;
+	string model_image_id = 2;
+}
+
+message CreateModelRequest {
+	repeated ModelInfo model_info = 1;
+}
+
+message CreateModelReply {
+	repeated string model_image_ids = 1;
+}
+
+message CreateGarmentRequest {
+	repeated GarmentInfo garment_info = 1;
+}
+
+message CreateGarmentReply {
+	repeated string garment_image_ids = 1;
+}
+
+message CreateBaseRequest {
+	repeated ImageBase image_bases = 1;
+}
+
+message CreateBaseReply {
+	repeated string image_base_ids = 1;
+}
+
+message GetModelByIDsRequest {
+	repeated string model_image_ids = 1;
+	bool with_image_base = 2;
+}
+
+message GetModelByIDsReply {
+	repeated ModelImage model_images = 1;
+}
+
+message GetGarmentByIDsRequest {
+	repeated string garment_image_ids = 1;
+	bool with_image_base = 2;
+}
+
+message GetGarmentByIDsReply {
+	repeated GarmentImage garment_images = 1;
+}
+
+message GetBaseByIDsRequest {
+	repeated string image_base_ids = 1;
+}
+
+message GetBaseByIDsReply {
+	repeated ImageBase image_bases = 1;
+}
+
+message GetRelatedModelByGarmentIDsRequest {
+	repeated string garment_image_ids = 1;
+	bool with_image_base = 2;
+}
+
+message GetRelatedModelByGarmentIDsReply {
+	repeated RelatedModelInfo related_model_info = 1;
+}
+
+message GetRelatedGarmentByModelIDsRequest {
+	repeated string model_image_ids = 1;
+	bool with_image_base = 2;
+}
+
+message GetRelatedGarmentByModelIDsReply {
+	repeated RelatedGarmentInfo related_garment_info = 1;
+}
+
+message DeleteModelByIDsRequest {
+	repeated string model_image_ids = 1;
+	bool not_delete_image_base = 2; // 默认删除base
+}
+
+message DeleteModelByIDsReply {
+	repeated string deleted_model_image_ids = 1;
+}
+
+message DeleteGarmentByIDsRequest {
+	repeated string garment_image_ids = 1;
+	bool not_delete_image_base = 2; // 默认删除base
+}
+
+message DeleteGarmentByIDsReply {
+	repeated string deleted_garment_image_ids = 1;
+}
+
+message DeleteBaseByIDsRequest {
+	repeated string image_base_ids = 1;
+}
+
+message DeleteBaseByIDsReply {
+	repeated string deleted_image_base_ids = 1;
+}
+
+message UpdateModelRequest {
+	repeated ModelImage model_images = 1;
+}
+
+message UpdateModelReply {
+	repeated string updated_model_image_ids = 1;
+}
+
+message UpdateGarmentRequest {
+	repeated GarmentImage garment_images = 1;
+}
+
+message UpdateGarmentReply {
+	repeated string updated_garment_image_ids = 1;
+}
+
+message UpdateBaseRequest {
+	repeated ImageBase image_bases = 1;
+}
+
+message UpdateBaseReply {
+	repeated string updated_image_base_ids = 1;
+}
+
+message CreateModelGarmentRelationRequest {
+	repeated ModelGarmentRelation model_garment_relations = 1;
+}
+
+message CreateModelGarmentRelationReply {
+	repeated ModelGarmentRelation created_model_garment_relations = 1;
+}
+
+message DeleteModelGarmentRelationRequest {
+	repeated ModelGarmentRelation model_garment_relations = 1;
+}
+
+message DeleteModelGarmentRelationReply {
+	repeated ModelGarmentRelation deleted_model_garment_relations = 1;
+}
+
+message RangeInfo {
+	int64 min = 1;
+	int64 max = 2;
+}
+
+message SearchModelRequest {
+	repeated string pose = 1;
+	repeated string body_type = 2;
+	repeated string life_stage = 3;
+	repeated string gender = 4;
+	SearchBaseRequest base_param = 5; // 这里不需要填写limit和last_created_at
+	int32 limit = 6;
+	int64 last_created_at = 7; // 上一页最后一条数据创建时间, 不填或填0则从头开始
+	repeated string pix_category = 8;
+	int64 end_created_at = 9; // 结束时间, 不填或填0则不限制, 和last_created_at一起使用
+	repeated string pose_black_list = 10;
+	repeated string body_type_black_list = 11;
+	repeated string life_stage_black_list = 12;
+	repeated string gender_black_list = 13;
+	repeated string pix_category_black_list = 14;
+	bool only_need_pair = 15; // 是否只需要成对数据, 默认false
+	repeated string model_count = 16; // 模特数量
+	repeated string model_type = 17; // 模特类型
+	repeated string model_count_black_list = 18; // 模特数量黑名单
+	repeated string model_type_black_list = 19; // 模特类型黑名单
+	repeated string hairstyle = 20; // 发型
+	repeated string hairstyle_black_list = 21; // 发型黑名单
+}
+
+message SearchModelReply {
+	repeated ModelImage model_images = 1;
+	int64 last_created_at = 2; // 本页最后一条数据创建时间, 下次请求翻页时需填写
+}
+
+message SearchGarmentRequest {
+	repeated string pose = 1;
+	repeated string type = 2;
+	repeated string life_stage = 3;
+	repeated string gender = 4;
+	SearchBaseRequest base_param = 5; // 这里不需要填写limit和last_created_at
+	int32 limit = 6;
+	int64 last_created_at = 7; // 上一页最后一条数据创建时间, 不填或填0则从头开始
+	repeated string pix_category = 8;
+	int64 end_created_at = 9; // 结束时间, 不填或填0则不限制, 和last_created_at一起使用
+	repeated string pose_black_list = 10;
+	repeated string type_black_list = 11;
+	repeated string life_stage_black_list = 12;
+	repeated string gender_black_list = 13;
+	repeated string pix_category_black_list = 14;
+	bool only_need_pair = 15; // 是否只需要成对数据, 默认false
+}
+
+message SearchGarmentReply {
+	repeated GarmentImage garment_images = 1;
+	int64 last_created_at = 2; // 本页最后一条数据创建时间, 下次请求翻页时需填写
+}
+
+message SearchBaseRequest {
+	repeated string source = 1;
+	repeated string sub_source = 2;
+	repeated string file_type = 3;
+	repeated string type = 4;
+	repeated RangeInfo width_range = 5;
+	repeated RangeInfo height_range = 6;
+	int32 limit = 7;
+	int64 last_created_at = 8; // 上一页最后一条数据创建时间, 不填或填0则从头开始
+	int64 end_created_at = 9; // 结束时间, 不填或填0则不限制, 和last_created_at一起使用
+	repeated string source_black_list = 10;
+	repeated string sub_source_black_list = 11;
+	repeated string file_type_black_list = 12;
+	repeated string type_black_list = 13;
+}
+
+message SearchBaseReply {
+	repeated ImageBase image_bases = 1;
+	int64 last_created_at = 2; // 本页最后一条数据创建时间, 下次请求翻页时需填写
+}
+
+message ModelWithRelatedGarmentInfo {
+	ModelImage model_image = 1;
+	repeated GarmentImage garment_images = 2;
+}
+
+message SearchModelWithRelatedGarmentReply {
+	repeated ModelWithRelatedGarmentInfo model_with_related_garment_info = 1;
+	int64 last_created_at = 2; // 本页最后一条数据创建时间, 下次请求翻页时需填写
+}
+
+message GarmentWithRelatedModelInfo {
+	GarmentImage garment_image = 1;
+	repeated ModelImage model_images = 2;
+}
+
+message SearchGarmentWithRelatedModelReply {
+	repeated GarmentWithRelatedModelInfo garment_with_related_model_info = 1;
+	int64 last_created_at = 2; // 本页最后一条数据创建时间, 下次请求翻页时需填写
+}
+
+enum UpdateBaseFields {
+	UPDATE_BASE_SOURCE = 0;
+	UPDATE_BASE_SUB_SOURCE = 1;
+	UPDATE_BASE_MD5 = 2;
+	UPDATE_BASE_FILE_TYPE = 3;
+	UPDATE_BASE_TYPE = 4;
+	UPDATE_BASE_WIDTH = 5;
+	UPDATE_BASE_HEIGHT = 6;
+	UPDATE_BASE_PATH = 7;
+	UPDATE_BASE_DOMAIN = 8;
+	UPDATE_BASE_EXT_INFO = 9;
+	UPDATE_BASE_ORIGINAL_INFO = 10;
+}
+
+enum UpdateModelFields {
+	UPDATE_MODEL_POSE = 0;
+	UPDATE_MODEL_BODY_TYPE = 1;
+	UPDATE_MODEL_TAGS = 2;
+	UPDATE_MODEL_DESCRIPTION = 3;
+	UPDATE_MODEL_LIFE_STAGE = 4;
+	UPDATE_MODEL_GENDER = 5;
+	UPDATE_MODEL_POSE_KEYPOINTS_INFO = 6;
+	UPDATE_MODEL_ORIGINAL_INFO = 7;
+	UPDATE_MODEL_RESULT_DOMAIN = 8;
+	UPDATE_MODEL_RESULT_PATH = 9;
+	UPDATE_MODEL_EXT_INFO = 10;
+	UPDATE_MODEL_IMAGE_BASE = 11;
+	UPDATE_MODEL_MODEL_COUNT = 12;
+	UPDATE_MODEL_MODEL_TYPE = 13;
+	UPDATE_MODEL_GPT4O_CLASSIFICATION = 14;
+	UPDATE_MODEL_HAIRSTYLE = 15;
+}
+
+enum UpdateGarmentFields {
+	UPDATE_GARMENT_POSE = 0;
+	UPDATE_GARMENT_TAGS = 1;
+	UPDATE_GARMENT_DESCRIPTION = 2;
+	UPDATE_GARMENT_LIFE_STAGE = 3;
+	UPDATE_GARMENT_TYPE = 4;
+	UPDATE_GARMENT_GENDER = 5;
+	UPDATE_GARMENT_RESULT_DOMAIN = 6;
+	UPDATE_GARMENT_RESULT_PATH = 7;
+	UPDATE_GARMENT_ORIGINAL_INFO = 8;
+	UPDATE_GARMENT_EXT_INFO = 9;
+	UPDATE_GARMENT_IMAGE_BASE = 10;
+}
+
+message UpdateModelFieldsRequest {
+	repeated int32 update_fields = 1; // 需要更新的字段, 参考UpdateModelFields
+	repeated ModelImage model_images = 2; // 只需要填写id和需要更新的字段
+}
+
+message UpdateModelFieldsReply {
+	repeated string updated_model_image_ids = 1;
+}
+
+message UpdateGarmentFieldsRequest {
+	repeated int32 update_fields = 1; // 需要更新的字段, 参考UpdateGarmentFields
+	repeated GarmentImage garment_images = 2; // 只需要填写id和需要更新的字段
+}
+
+message UpdateGarmentFieldsReply {
+	repeated string updated_garment_image_ids = 1;
+}
+
+message UpdateBaseFieldsRequest {
+	repeated int32 update_fields = 1; // 需要更新的字段, 参考UpdateBaseFields
+	repeated ImageBase image_bases = 2; // 只需要填写id和需要更新的字段
+}
+
+message UpdateBaseFieldsReply {
+	repeated string updated_image_base_ids = 1;
+}
+
+message GetModelByMd5Request {
+	repeated string md5_list = 1;
+}
+
+message GetModelByMd5Reply {
+	repeated ModelImage model_images = 1;
+}
+
+message GetGarmentByMd5Request {
+	repeated string md5_list = 1;
+}
+
+message GetGarmentByMd5Reply {
+	repeated GarmentImage garment_images = 1;
+}
+
+message GetBaseByMd5Request {
+	repeated string md5_list = 1;
+}
+
+message GetBaseByMd5Reply {
+	repeated ImageBase image_bases = 1;
+}
+
+message ModelSimilaritySearchWithRelatedGarmentRequest {
+	string media_data = 1;
+	string media_data_type = 2;
+	int32 top_k = 3;
+	bool only_need_pair = 4; // 是否只需要成对数据, 默认false
+	repeated string sub_source_black_list = 5; // 不需要搜索的sub_source
+}
+
+message ModelSimilaritySearchWithRelatedGarmentReply {
+	repeated ModelWithRelatedGarmentInfo model_with_related_garment_info = 1;
+}
+
+message GarmentSimilaritySearchWithRelatedModelRequest {
+	string media_data = 1;
+	string media_data_type = 2;
+	int32 top_k = 3;
+	bool only_need_pair = 4; // 是否只需要成对数据, 默认false
+	repeated string sub_source_black_list = 5; // 不需要搜索的sub_source
+}
+
+message GarmentSimilaritySearchWithRelatedModelReply {
+	repeated GarmentWithRelatedModelInfo garment_with_related_model_info = 1;
+}
+
+message GetRandomModelSamplesWithRelatedGarmentRequest {
+	repeated string pose = 1;
+	repeated string body_type = 2;
+	repeated string life_stage = 3;
+	repeated string gender = 4;
+	SearchBaseRequest base_param = 5; // 这里不需要填写limit和last_created_at
+	repeated string pix_category = 6;
+	repeated RangeInfo created_at_range = 7;
+	int32 sample_size = 8;
+	float sample_percentage = 9; // 采样百分比, 0-1
+	bool only_need_pair = 10; // 是否只需要成对数据, 默认false
+	repeated string pose_black_list = 11;
+	repeated string body_type_black_list = 12;
+	repeated string life_stage_black_list = 13;
+	repeated string gender_black_list = 14;
+	repeated string pix_category_black_list = 15;
+	repeated string model_count = 16; // 模特数量
+	repeated string model_type = 17; // 模特类型
+	repeated string model_count_black_list = 18; // 模特数量黑名单
+	repeated string model_type_black_list = 19; // 模特类型黑名单
+	repeated string hairstyle = 20; // 发型
+	repeated string hairstyle_black_list = 21; // 发型黑名单
+}
+
+message GetRandomModelSamplesWithRelatedGarmentReply {
+	repeated ModelWithRelatedGarmentInfo model_with_related_garment_info = 1;
+}
+
+message GetRandomGarmentSamplesWithRelatedModelRequest {
+	repeated string pose = 1;
+	repeated string type = 2;
+	repeated string life_stage = 3;
+	repeated string gender = 4;
+	SearchBaseRequest base_param = 5; // 这里不需要填写limit和last_created_at
+	repeated string pix_category = 6;
+	repeated RangeInfo created_at_range = 7;
+	int32 sample_size = 8;
+	float sample_percentage = 9; // 采样百分比, 0-1
+	bool only_need_pair = 10; // 是否只需要成对数据, 默认false
+	repeated string pose_black_list = 11;
+	repeated string type_black_list = 12;
+	repeated string life_stage_black_list = 13;
+	repeated string gender_black_list = 14;
+	repeated string pix_category_black_list = 15;
+}
+
+message GetRandomGarmentSamplesWithRelatedModelReply {
+	repeated GarmentWithRelatedModelInfo garment_with_related_model_info = 1;
+}
