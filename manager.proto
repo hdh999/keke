@@ -226,6 +226,41 @@ service Manager {
 		  body: "*",
 		};
 	};
+	// 创建视频
+	rpc CreateVideo (CreateVideoRequest) returns (CreateVideoReply){
+		option (google.api.http) = {
+		  post: "/create_video",
+		  body: "*",
+		};
+	};
+	// 获取视频信息
+	rpc GetVideoByIDs (GetVideoByIDsRequest) returns (GetVideoByIDsReply){
+		option (google.api.http) = {
+		  post: "/get_video_by_ids",
+		  body: "*",
+		};
+	};
+	// 删除视频
+	rpc DeleteVideoByIDs (DeleteVideoByIDsRequest) returns (DeleteVideoByIDsReply){
+		option (google.api.http) = {
+		  post: "/delete_video_by_ids",
+		  body: "*",
+		};
+	};
+	// 更新视频
+	rpc UpdateVideo (UpdateVideoRequest) returns (UpdateVideoReply){
+		option (google.api.http) = {
+		  post: "/update_video",
+		  body: "*",
+		};
+	};
+	// 搜索视频
+	rpc SearchVideo (SearchVideoRequest) returns (SearchVideoReply){
+		option (google.api.http) = {
+		  post: "/search_video",
+		  body: "*",
+		};
+	};
 }
 
 message ImageBase {
@@ -713,4 +748,108 @@ message GetRandomGarmentSamplesWithRelatedModelRequest {
 
 message GetRandomGarmentSamplesWithRelatedModelReply {
 	repeated GarmentWithRelatedModelInfo garment_with_related_model_info = 1;
+}
+
+message VideoInfo {
+	string video_id = 1;
+	string source = 2;
+	string sub_source = 3;
+	int32 width = 4;
+	int32 height = 5;
+	float aspect_ratio = 6;
+	float fps = 7;
+	int32 frame_count = 8;
+	float duration = 9;
+	repeated string tags = 10;
+	string title = 11;
+	string description = 12;
+	string category = 13;
+	map<string, string> original_info = 14;
+	map<string, string> ext_info = 15;
+	map<string, string> domain = 16;
+	map<string, string> path = 17;
+	int64 created_at = 18;
+	int64 updated_at = 19;
+	string md5 = 20;
+	repeated string camera_movements = 21;
+}
+
+message CreateVideoRequest {
+	repeated VideoInfo video_info = 1;
+}
+
+message CreateVideoReply {
+	repeated string video_ids = 1;
+}
+
+message GetVideoByIDsRequest {
+	repeated string video_ids = 1;
+}
+
+message GetVideoByIDsReply {
+	repeated VideoInfo video_info = 1;
+}
+
+message DeleteVideoByIDsRequest {
+	repeated string video_ids = 1;
+}
+
+message DeleteVideoByIDsReply {
+	repeated string deleted_video_ids = 1;
+}
+
+enum UpdateVideoFields {
+	UPDATE_VIDEO_SOURCE = 0;
+	UPDATE_VIDEO_SUB_SOURCE = 1;
+	UPDATE_VIDEO_WIDTH = 2;
+	UPDATE_VIDEO_HEIGHT = 3;
+	UPDATE_VIDEO_ASPECT_RATIO = 4;
+	UPDATE_VIDEO_FPS = 5;
+	UPDATE_VIDEO_FRAME_COUNT = 6;
+	UPDATE_VIDEO_DURATION = 7;
+	UPDATE_VIDEO_TAGS = 8;
+	UPDATE_VIDEO_TITLE = 9;
+	UPDATE_VIDEO_DESCRIPTION = 10;
+	UPDATE_VIDEO_CATEGORY = 11;
+	UPDATE_VIDEO_ORIGINAL_INFO = 12;
+	UPDATE_VIDEO_EXT_INFO = 13;
+	UPDATE_VIDEO_DOMAIN = 14;
+	UPDATE_VIDEO_PATH = 15;
+	UPDATE_VIDEO_MD5 = 16;
+	UPDATE_VIDEO_CAMERA_MOVEMENTS = 17;
+}
+
+message UpdateVideoRequest {
+	repeated int32 update_fields = 1; // 需要更新的字段, 参考UpdateVideoFields
+	repeated VideoInfo video_info = 2;
+}
+
+message UpdateVideoReply {
+	repeated string updated_video_ids = 1;
+}
+
+message FloatRangeInfo {
+	float min = 1;
+	float max = 2;
+}
+
+message SearchVideoRequest {
+	repeated string source = 1;
+	repeated string sub_source = 2;
+	repeated RangeInfo width_range = 3;
+	repeated RangeInfo height_range = 4;
+	repeated FloatRangeInfo aspect_ratio_range = 5;
+	repeated FloatRangeInfo fps_range = 6;
+	repeated RangeInfo frame_count_range = 7;
+	repeated FloatRangeInfo duration_range = 8;
+	repeated string category = 9;
+	int32 limit = 10;
+	int64 last_created_at = 11; // 上一页最后一条数据创建时间, 不填或填0则从头开始
+	int64 end_created_at = 12; // 结束时间, 不填或填0则不限制, 和last_created_at一起使用
+	string search_keyword = 13; // 搜索关键词
+}
+
+message SearchVideoReply {
+	repeated VideoInfo video_info = 1;
+	int64 last_created_at = 2; // 本页最后一条数据创建时间, 下次请求翻页时需填写
 }
